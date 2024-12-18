@@ -1,0 +1,44 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+ 
+
+# Event-ajat samaan dataan
+
+Painotukset pitää saada kaikille event- ja treatment-sensoroinnin ajoille, joten seuraavat rivit täytyy ajaa.
+
+
+```{r rep.times}
+
+rep.times1 <- unique(c(toy.long2$tstop[toy.long2$cens==1 & toy.long2$arm == "A"],
+                       toy.long2$tstop[toy.long2$event==1]))
+rep.times2 <- unique(c(toy.long2$tstop[toy.long2$cens==1 & toy.long2$arm == "B"],
+                       toy.long2$tstop[toy.long2$event==1]))
+
+# to put times in same order as arms levels
+# (Huom. tätä riviä ei ollut referoidussa artikkelissa,
+# mutta R-dokumentaation mukaan se kannattaa ajaa.) 
+levels(toy.long2[, "arm"])
+
+
+# Now, we can replicate the rows
+toy.rep <- replicRows(toy.long2, tstart = "tstart", tstop = "tstop",
+                      event = "event", cens = "cens",
+                      times1 = rep.times1, times2 = rep.times2,
+                      arm = "arm")
+
+```
+
+
+Lopputuloksena seuraavan näköinen datasetti:
+
+
+```{r toy.rep, echo=FALSE}
+
+knitr::kable(head(toy.rep))
+
+```
+
+ 

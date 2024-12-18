@@ -1,0 +1,18 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+# Vaaditut paketit
+
+Latasin näitä harjoituksia varten seuraavat paketit sessioon. Käytän aina pacmania pakettien latailuun, joten se kannattaa ihan ensiksi asentaa, jos se ei jo ole R:ään asennettuna.
+
+<br>
+```{r paketit}
+library(pacman)
+p_load(dplyr, dlookr, ipcwswitch, ipw, ggplot2, survival, survminer)
+```
+<br>
+ 

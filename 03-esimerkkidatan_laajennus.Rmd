@@ -1,0 +1,112 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+ 
+# Esimerkkidatan laajennus
+
+Kopioin manuaalisesti koodin tribbleksi, sen jälkeen lisäsin randomilla dataa, muuttuja kerrallaan, kunnes n oli 400. Esimerkkikoodia ei tarvitse sen enempää opiskella - riittää, että seuraavat rivit kopioi dataansa:
+<br>
+
+```{r toydata_iso, echo=TRUE}
+
+toydata <- tibble::tribble(
+~id,~randt,~lastdt,~status,~age,~ps1,~ps2,~ps3,~dt2,~dt3,~arm,~swtrtdt,
+1L, "12.1.2018", "2.3.2018", 1L, 20L, 0L, 0L, 0L, "2.2.2018", "1.3.2018", "A", "1.3.2018",
+2L, "4.11.2017", "15.12.2017", 1L, 50L, 1L, 1L, 2L, "1.12.2017", "12.12.2017", "B", NA,
+3L, "20.5.2017", "4.1.2018", 0L, 40L, 0L, 0L, 1L, "2.8.2017", "2.1.2018", "A", NA
+  )
+
+
+# konvertoidaan pvm-sarakkeet oikeasti date-muotoisiksi:
+toydata$randt <- as.Date(toydata$randt, "%d.%m.%Y") 
+toydata$lastdt <- as.Date(toydata$lastdt, "%d.%m.%Y") 
+toydata$dt2 <- as.Date(toydata$dt2, "%d.%m.%Y") 
+toydata$dt3 <- as.Date(toydata$dt3, "%d.%m.%Y") 
+toydata$swtrtdt <- as.Date(toydata$swtrtdt, "%d.%m.%Y") 
+
+# konvertoidaan arm-sarake factor-muotoon:
+toydata$arm <- as.factor(toydata$arm) 
+
+# Luodaan lisää random-dataa.
+#
+# Ensin lisää tutkittavia (= id-numeroita) siten, että n=400:
+toydata <- toydata %>% add_row(id = 4:400)
+
+# "Uusille" tutkittaville pvm, jolloin randomoitu mukaan tutkimukseen:
+toydata$randt[4:400] <- toydata$randt[1] + sample(1:30, 397, replace = T)
+
+# Uusille tutkittaville ensimmäinen "labrakontrollipvm",
+# muotoa randomointi-pvm + 60 + 1-30:
+toydata <- toydata %>%
+  mutate(dt2 = case_when(is.na(dt2) ~ toydata$randt + 60
+                         + sample(1:30, 400, replace = T),
+                         !is.na(dt2) ~ dt2))
+
+# Uusille tutkittaville toinen "labrakontrollipvm",
+# muotoa randomointi-pvm + 100 + 1-30:
+toydata <- toydata %>%
+  mutate(dt3 = case_when(is.na(dt3) ~ toydata$randt + 100
+                         + sample(1:30, 400, replace = T),
+                         !is.na(dt3) ~ dt3))
+
+# Uusille tutkittaville pvm, jolloin viimeksi potilaasta kuultiin,
+# muotoa randomointi-pvm + 150 + 1-30:
+toydata <- toydata %>%
+  mutate(lastdt = case_when(is.na(lastdt) ~ toydata$randt + 150
+                            + sample(1:300, 400, replace = T),
+                            !is.na(lastdt) ~ lastdt))
+
+# Uusille tutkittaville puuttuvat "labratulokset" (kovariaatit):
+toydata$ps1[4:400] <- sample(0:2, 397, replace = T)
+toydata$ps2[4:400] <- sample(0:2, 397, replace = T)
+toydata$ps3[4:400] <- sample(0:2, 397, replace = T)
+
+# Uusille tutkittaville arm-arvot (A vs. B):
+toydata$arm[4:400] <- sample(c("A","B"), 397, replace = TRUE)
+
+# Uusille tutkittaville random-iät:
+toydata$age[4:400] <- sample(20:50, 397, replace = T)
+
+# Seuraavaksi uusille tutkittaville pvm,
+# jolloin mahdollisesti siirtyivät toiseen tutkimus-armiin
+# Laitetaan kuitenkin näitä siirtyjiä vain armiin "A",
+# jotta näemme, toimiiko painotus.
+# Ensin random-apumuuttuja: jos saa arvon 3,
+# tutkittava vaihtaa ryhmää kesken tutkimuksen:
+toydata$apumuuttuja <- sample(1:3, 400, replace = T)
+
+toydata <- toydata %>%
+  mutate(swtrtdt = case_when(apumuuttuja == 3 & arm =="A" ~ toydata$lastdt
+                             - sample(1:3, 400, replace = T)))
+
+# Kuvitellaan asetelma, jossa armissa "A" myös henkilöitä kuolee enemmän.
+toydata[4:400,] <- toydata[4:400,] %>%
+                      mutate(status = case_when(apumuuttuja == 1 & arm =="A" ~ 1,
+                                                apumuuttuja == 2 & arm =="A" ~ 1,
+                                                apumuuttuja == 3 & arm =="A" ~ 0,
+                    
+                                                apumuuttuja == 1 & arm =="B" ~ 1,
+                                                apumuuttuja == 2 & arm =="B" ~ 0,
+                                                apumuuttuja == 3 & arm =="B" ~ 0  ))
+
+
+
+# Yritetään antaa kaikille samat arvot eri aikapisteiden ps-kovariaattiin ihan testiksi:
+toydata$ps1 <- 1
+toydata$ps2 <- 1
+toydata$ps3 <- 1
+
+
+
+# ipswswitch nikottelee tibblejen kanssa,
+# joten on muutettava datasettimme data.frame-muotoon:
+toydata <- as.data.frame(toydata)
+
+
+```
+<br>
+
+ 

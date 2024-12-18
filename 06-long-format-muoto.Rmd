@@ -1,0 +1,33 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+    
+# Long format -muoto 
+
+Long format -muoto aikaansaadaan *wideToLongTDC*-komennolla:
+
+```{r wideToLongTDC}
+
+toy.long <- wideToLongTDC(data = toydata, id = "id",
+                          tstart = "randt", tstop = "lastdt",
+                          event = "status",
+                          bas.cov = c("age", "arm", "swtrtdt"),
+                          mes.cov = list(TDconf = c("ps1", "ps2", "ps3")),
+                          time.cov = list(c("randt", "dt2", "dt3")),
+                          times = kept.t[[1]])
+
+
+```
+
+Tämän jälkeen data näyttää seuraavalta (tässä näytetään 10 ensimmäistä riviä). Huomaa, että muuttujaan TDconf tallentuu kaikkien kovariaattien ps1, ps2 ja p3 toistetut arvot, aggregaattina.
+
+```{r toylong, echo=FALSE}
+
+knitr::kable(head(toy.long))
+
+```
+
+ 

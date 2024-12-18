@@ -1,0 +1,21 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+   
+# Survival-käyrä: kaikki tutkittavat
+
+Survival-käyrän plottaamista ei käsitelty yllä referoidussa lähdeartikkelissa. Sain kuitenkin käyrää aikaiseksi kaikkien tutkittavien ryhmästä (sekä arm A että B) seuraavalla tavalla:
+
+
+```{r fit_all}
+
+fit_all <- survfit(fit.stab.w)
+ggsurvplot(fit_all, data=toydata, color = "#2E9FDF",
+           ggtheme = theme_minimal())
+
+
+```
+
+ 

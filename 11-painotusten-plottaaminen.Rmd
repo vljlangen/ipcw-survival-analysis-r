@@ -1,0 +1,39 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+ 
+  
+# Painotusten plottaaminen
+
+Luodut painotukset pystyy tämän jälkeen plottaamaan seuraavasti. (Allekirjoittaneelle on epäselvää, kuinka yleistä on, että näitä julkaistaan esim. supplemental-osuudessa.)
+
+
+Un-truncated stabilized weights:
+
+```{r un_truncated}
+
+ipwplot(weights = toy.rep$weights,
+        timevar = toy.rep$tstart,
+        binwidth = 50,
+        logscale = T,
+        xlab = "Time since enrolment (days)",
+        ylab = "Logarithm of the stabilized\n un-truncated weights")
+
+```
+
+
+Truncated stabilized weights:
+
+```{r truncated}
+
+ipwplot(weights = toy.rep$weights,
+        timevar = toy.rep$tstart,
+        binwidth = 50,
+        logscale = T,
+        xlab = "Time since enrolment (days)",
+        ylab = "Logarithm of the stabilized\n un-truncated weights")
+
+```
+ 

@@ -1,0 +1,17 @@
+alkusanat
+vaaditut-paketit
+esimerkkikoodi
+esimerkkidatan-laajennus
+esimerkkidatan-silmäily
+esimerkkidatan-struktuuri
+timestokeep-komento
+long-format--muoto
+päivämäärien-käsittely
+ryhmää-vaihtavien-sensorointi
+sensuroinnin-vaikutus
+event-ajat-samaan-dataan
+painotusten-laskeminen
+painotusten-plottaaminen
+coxin-msm-mallin-kokoaminen
+survival-käyrä-kaikki-tutkittavat
+survival-käyrä-arm-a-ja-b

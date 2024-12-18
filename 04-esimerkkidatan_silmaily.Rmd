@@ -1,0 +1,28 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+  
+
+# Esimerkkidatan silmäily
+
+Silmäillään hieman esimerkkidataa, varmistetaan, että kaikki kunnossa. Katsotaan head-komennolla 10 ensimmäistä riviä:
+
+```{r toydata_iso_silmaily, echo=FALSE}
+knitr::kable(head(toydata))
+```
+
+
+## Esimerkkidatan struktuuri
+
+On parasta katsoa myös esimerkkidatan struktuuri. *ipswswitch* nikottelee heti vastaan, jos esim. kvalitatiiviset muuttujat eivät ole tyyppiä factor. Kaikki näyttää alla olevassa listauksessa olevan kunnossa.<br><br>
+
+
+
+```{r toydata_iso_str}
+str(toydata)
+```
+
+ 

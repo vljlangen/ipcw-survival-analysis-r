@@ -1,0 +1,33 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+# Päivämäärien käsittely
+
+Päivämäärät muutetaan numeeriseen muotoon, jolloin tstart-muuttuja pisteessä 0.
+
+Tämä tehdään copy-pastettamalla seuraavat rivit koodiin.
+
+```{r dates_to_numeric}
+
+# Put dates in numeric format with tstart at 0
+toy.long$tstart <- as.numeric(toy.long$tstart)
+toy.long$tstop <- as.numeric(toy.long$tstop)
+toy.long$swtrtdt <- as.numeric(toy.long$swtrtdt)
+tabi <- split(toy.long, toy.long$id)
+L.tabi <- length(tabi)
+tablist <- lapply(1:L.tabi, function(i){
+  refstart <- tabi[[i]]$tstart[1]
+  tabi[[i]]$tstart <- tabi[[i]]$tstart - refstart
+  tabi[[i]]$tstop <- tabi[[i]]$tstop - refstart
+  tabi[[i]]$swtrtdt <- tabi[[i]]$swtrtdt - refstart
+  return(tabi[[i]])
+})
+toy.long <- do.call( rbind, tablist )
+
+```
+
+

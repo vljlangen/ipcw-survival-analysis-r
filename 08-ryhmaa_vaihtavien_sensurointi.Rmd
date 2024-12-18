@@ -1,0 +1,36 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+ 
+
+# Ryhmää vaihtavien sensorointi
+
+Seuraavaksi käsitellään ryhmää vaihtavien tutkittavien sensorointia.
+
+Tämä tapahtuu copy-pastettamalla seuraava koodinpätkä mukaan:
+
+
+```{r toy.long2}
+
+# Patients are censored when initiating the other arm treatment, that is, at time swtrtdt
+toy.long2 <- cens.ipw(toy.long, id = "id", tstart = "tstart", tstop = "tstop",
+                      event = "event", arm = "arm",
+                      realtrt = FALSE, censTime ="swtrtdt")
+
+```
+
+
+## Sensuroinnin vaikutus
+
+Seuraavassa esitettynä muutamia rivejä datasetistä, ennen (ensimmäinen taulukko) ja jälkeen (jälkimmäinen taulukko) yllä mainitun sensuroinnin.
+
+
+```{r toy.long_vs_toy_long2, echo=FALSE}
+
+knitr::kable(head(toy.long))
+knitr::kable(head(toy.long2))
+
+```
+ 

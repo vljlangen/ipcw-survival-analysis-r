@@ -1,0 +1,31 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+# Esimerkkikoodi
+
+Edellä mainitussa artikkelissa oli vain minimaalinen harjoitusdatasetti, joka näkyy alla. Sen muoto/muuttujat ovat seuraavanlaiset (lähde: [Grafféon ym. (PMID: 31442762):](https://www.sciencedirect.com/science/article/pii/S0010482519302082#bib14)
+
+ This Toy Example Data is given in wide format. It contains the following variables:
+   
+- id is the patient's identifier,
+- randt is the date of the randomization visit,
+- lastdt is the date of latest news,
+- status is equal to 1 if the patient dies on lastdt (and 0 otherwise),
+- age is the patient's age,
+- ps1, ps2, ps3 are the values of a covariate measured at dates randt, dt2, dt3, respectively
+- arm is the patient's randomized arm,
+- swtrtdt is the date when the patient initiates the other arm treatment (NA if does not happen).
+
+<br>
+```{r toydata_pieni, echo=FALSE}
+
+knitr::kable(ipcwswitch::toydata)
+
+```
+<br>
+
+ 

@@ -1,0 +1,34 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+   
+
+# Survival-käyrä: arm A ja B
+
+Erityistä pohdintaa aiheutti tässä otsikossa esitetty kysymys. Ryhmien erottamiseksi toisistaan omiksi survival-käyrikseen täytyy käsitykseni mukaan tehdä "apu-dataframe", johon kuvaillaan millintarkasti, mitä muuttujia tahdotaan plotata. Jos ja kun erotellaan ryhmät erikseen, pitää niiden levelien olla millintarkasti plotattavaa datasettiä vastaavat, ja kyseinen apumuuttuja täytyy muuttaa *factor*-muotoon. Jos joukossa on muita kovariaatteja, niiden meania käytetään survival-käyrän mallissa:
+
+
+```{r fit_groups}
+
+# Apudatasetin luominen 
+apudf <- with(toydata,
+              data.frame(arm = c("A", "B"), 
+                         age = rep(mean(age, na.rm = TRUE), 2)))
+
+apudf$arm <- as.factor(apudf$arm) 
+
+apudf
+
+fit2 <- survfit(fit.stab.w, newdata = apudf)
+
+ggsurvplot(fit2,
+           data=toydata,
+           conf.int = TRUE,
+           legend.labs=c("Arm = A", "Arm = B"),
+           ggtheme = theme_minimal())
+
+
+```
+

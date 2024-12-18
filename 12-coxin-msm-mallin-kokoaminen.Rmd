@@ -1,0 +1,28 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+  
+# Coxin MSM-mallin kokoaminen
+
+Nyt kun painotukset on vihdoin viimein saatu laskettua, ne saadaan otettua Coxin MSM-malliin (*marginal structural models*) mukaan. Käytetään *coxph*-funktiota paketista *survival*, ja painotukset määritetään funktion argumenteissa.
+
+
+Truncated stabilized weights:
+
+```{r coxph}
+
+fit.stab.w <- coxph(Surv(tstart, tstop, event) ~ age + arm + cluster(id),
+                    data = toy.rep, weights = toy.rep$weights.trunc)
+
+```
+
+Mallin tulos saadaan laajemmin esiin komennolla *summary*:
+
+```{r coxph_summary}
+
+summary(fit.stab.w)
+
+```
+ 

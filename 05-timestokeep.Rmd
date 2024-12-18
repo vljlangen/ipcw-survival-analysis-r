@@ -1,0 +1,32 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+   
+
+# timesTokeep()-komento
+
+Survival-analyysi valmistellaan ensin *timesTokeep*-komennolla käsittelyllä.
+
+Seuraavaksi ajetaan laajennettu *toydata* monen eri esivaiheen kautta, jotta sille voidaan lopuksi laskea painotukset ja tehdä aivan lopuksi analyysit.
+
+```{r timesTokeep}
+kept.t <- timesTokeep(toydata, id       = "id",
+                      tstart   = "randt",
+                      tstop    = "lastdt",
+                      mes.cov  = list(c("ps1", "ps2", "ps3")),
+                      time.cov = list(c("randt", "dt2", "dt3")))
+
+```
+
+
+Esimerkiksi tutkittavan id=3 päivämäärät näyttävät seuraavalta:
+
+
+```{r kept.t}
+kept.t[[1]][[3]]
+```
+
+ 

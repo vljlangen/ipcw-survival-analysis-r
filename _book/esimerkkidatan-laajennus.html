@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Esimerkkidatan laajennus | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä</title>
+  <meta name="description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Esimerkkidatan laajennus | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Esimerkkidatan laajennus | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä" />
+  
+  <meta name="twitter:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
+  
+
+<meta name="author" content="Ville Langén" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="esimerkkikoodi.html"/>
+<link rel="next" href="esimerkkidatan-silmäily.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Alkusanat</a></li>
+<li class="chapter" data-level="2" data-path="vaaditut-paketit.html"><a href="vaaditut-paketit.html"><i class="fa fa-check"></i><b>2</b> Vaaditut paketit</a></li>
+<li class="chapter" data-level="3" data-path="esimerkkikoodi.html"><a href="esimerkkikoodi.html"><i class="fa fa-check"></i><b>3</b> Esimerkkikoodi</a></li>
+<li class="chapter" data-level="4" data-path="esimerkkidatan-laajennus.html"><a href="esimerkkidatan-laajennus.html"><i class="fa fa-check"></i><b>4</b> Esimerkkidatan laajennus</a></li>
+<li class="chapter" data-level="5" data-path="esimerkkidatan-silmäily.html"><a href="esimerkkidatan-silmäily.html"><i class="fa fa-check"></i><b>5</b> Esimerkkidatan silmäily</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="esimerkkidatan-silmäily.html"><a href="esimerkkidatan-silmäily.html#esimerkkidatan-struktuuri"><i class="fa fa-check"></i><b>5.1</b> Esimerkkidatan struktuuri</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="timestokeep-komento.html"><a href="timestokeep-komento.html"><i class="fa fa-check"></i><b>6</b> timesTokeep()-komento</a></li>
+<li class="chapter" data-level="7" data-path="long-format--muoto.html"><a href="long-format--muoto.html"><i class="fa fa-check"></i><b>7</b> Long format -muoto</a></li>
+<li class="chapter" data-level="8" data-path="päivämäärien-käsittely.html"><a href="päivämäärien-käsittely.html"><i class="fa fa-check"></i><b>8</b> Päivämäärien käsittely</a></li>
+<li class="chapter" data-level="9" data-path="ryhmää-vaihtavien-sensorointi.html"><a href="ryhmää-vaihtavien-sensorointi.html"><i class="fa fa-check"></i><b>9</b> Ryhmää vaihtavien sensorointi</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ryhmää-vaihtavien-sensorointi.html"><a href="ryhmää-vaihtavien-sensorointi.html#sensuroinnin-vaikutus"><i class="fa fa-check"></i><b>9.1</b> Sensuroinnin vaikutus</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="event-ajat-samaan-dataan.html"><a href="event-ajat-samaan-dataan.html"><i class="fa fa-check"></i><b>10</b> Event-ajat samaan dataan</a></li>
+<li class="chapter" data-level="11" data-path="painotusten-laskeminen.html"><a href="painotusten-laskeminen.html"><i class="fa fa-check"></i><b>11</b> Painotusten laskeminen</a></li>
+<li class="chapter" data-level="12" data-path="painotusten-plottaaminen.html"><a href="painotusten-plottaaminen.html"><i class="fa fa-check"></i><b>12</b> Painotusten plottaaminen</a></li>
+<li class="chapter" data-level="13" data-path="coxin-msm-mallin-kokoaminen.html"><a href="coxin-msm-mallin-kokoaminen.html"><i class="fa fa-check"></i><b>13</b> Coxin MSM-mallin kokoaminen</a></li>
+<li class="chapter" data-level="14" data-path="survival-käyrä-kaikki-tutkittavat.html"><a href="survival-käyrä-kaikki-tutkittavat.html"><i class="fa fa-check"></i><b>14</b> Survival-käyrä: kaikki tutkittavat</a></li>
+<li class="chapter" data-level="15" data-path="survival-käyrä-arm-a-ja-b.html"><a href="survival-käyrä-arm-a-ja-b.html"><i class="fa fa-check"></i><b>15</b> Survival-käyrä: arm A ja B</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="esimerkkidatan-laajennus" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Esimerkkidatan laajennus<a href="esimerkkidatan-laajennus.html#esimerkkidatan-laajennus" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Kopioin manuaalisesti koodin tribbleksi, sen jälkeen lisäsin randomilla dataa, muuttuja kerrallaan, kunnes n oli 400. Esimerkkikoodia ei tarvitse sen enempää opiskella - riittää, että seuraavat rivit kopioi dataansa:
+<br></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="esimerkkidatan-laajennus.html#cb2-1" tabindex="-1"></a>toydata <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb2-2"><a href="esimerkkidatan-laajennus.html#cb2-2" tabindex="-1"></a><span class="sc">~</span>id,<span class="sc">~</span>randt,<span class="sc">~</span>lastdt,<span class="sc">~</span>status,<span class="sc">~</span>age,<span class="sc">~</span>ps1,<span class="sc">~</span>ps2,<span class="sc">~</span>ps3,<span class="sc">~</span>dt2,<span class="sc">~</span>dt3,<span class="sc">~</span>arm,<span class="sc">~</span>swtrtdt,</span>
+<span id="cb2-3"><a href="esimerkkidatan-laajennus.html#cb2-3" tabindex="-1"></a>1L, <span class="st">&quot;12.1.2018&quot;</span>, <span class="st">&quot;2.3.2018&quot;</span>, 1L, 20L, 0L, 0L, 0L, <span class="st">&quot;2.2.2018&quot;</span>, <span class="st">&quot;1.3.2018&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;1.3.2018&quot;</span>,</span>
+<span id="cb2-4"><a href="esimerkkidatan-laajennus.html#cb2-4" tabindex="-1"></a>2L, <span class="st">&quot;4.11.2017&quot;</span>, <span class="st">&quot;15.12.2017&quot;</span>, 1L, 50L, 1L, 1L, 2L, <span class="st">&quot;1.12.2017&quot;</span>, <span class="st">&quot;12.12.2017&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="cn">NA</span>,</span>
+<span id="cb2-5"><a href="esimerkkidatan-laajennus.html#cb2-5" tabindex="-1"></a>3L, <span class="st">&quot;20.5.2017&quot;</span>, <span class="st">&quot;4.1.2018&quot;</span>, 0L, 40L, 0L, 0L, 1L, <span class="st">&quot;2.8.2017&quot;</span>, <span class="st">&quot;2.1.2018&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="cn">NA</span></span>
+<span id="cb2-6"><a href="esimerkkidatan-laajennus.html#cb2-6" tabindex="-1"></a>  )</span>
+<span id="cb2-7"><a href="esimerkkidatan-laajennus.html#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="esimerkkidatan-laajennus.html#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="esimerkkidatan-laajennus.html#cb2-9" tabindex="-1"></a><span class="co"># konvertoidaan pvm-sarakkeet oikeasti date-muotoisiksi:</span></span>
+<span id="cb2-10"><a href="esimerkkidatan-laajennus.html#cb2-10" tabindex="-1"></a>toydata<span class="sc">$</span>randt <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(toydata<span class="sc">$</span>randt, <span class="st">&quot;%d.%m.%Y&quot;</span>) </span>
+<span id="cb2-11"><a href="esimerkkidatan-laajennus.html#cb2-11" tabindex="-1"></a>toydata<span class="sc">$</span>lastdt <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(toydata<span class="sc">$</span>lastdt, <span class="st">&quot;%d.%m.%Y&quot;</span>) </span>
+<span id="cb2-12"><a href="esimerkkidatan-laajennus.html#cb2-12" tabindex="-1"></a>toydata<span class="sc">$</span>dt2 <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(toydata<span class="sc">$</span>dt2, <span class="st">&quot;%d.%m.%Y&quot;</span>) </span>
+<span id="cb2-13"><a href="esimerkkidatan-laajennus.html#cb2-13" tabindex="-1"></a>toydata<span class="sc">$</span>dt3 <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(toydata<span class="sc">$</span>dt3, <span class="st">&quot;%d.%m.%Y&quot;</span>) </span>
+<span id="cb2-14"><a href="esimerkkidatan-laajennus.html#cb2-14" tabindex="-1"></a>toydata<span class="sc">$</span>swtrtdt <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(toydata<span class="sc">$</span>swtrtdt, <span class="st">&quot;%d.%m.%Y&quot;</span>) </span>
+<span id="cb2-15"><a href="esimerkkidatan-laajennus.html#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="esimerkkidatan-laajennus.html#cb2-16" tabindex="-1"></a><span class="co"># konvertoidaan arm-sarake factor-muotoon:</span></span>
+<span id="cb2-17"><a href="esimerkkidatan-laajennus.html#cb2-17" tabindex="-1"></a>toydata<span class="sc">$</span>arm <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(toydata<span class="sc">$</span>arm) </span>
+<span id="cb2-18"><a href="esimerkkidatan-laajennus.html#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="esimerkkidatan-laajennus.html#cb2-19" tabindex="-1"></a><span class="co"># Luodaan lisää random-dataa.</span></span>
+<span id="cb2-20"><a href="esimerkkidatan-laajennus.html#cb2-20" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb2-21"><a href="esimerkkidatan-laajennus.html#cb2-21" tabindex="-1"></a><span class="co"># Ensin lisää tutkittavia (= id-numeroita) siten, että n=400:</span></span>
+<span id="cb2-22"><a href="esimerkkidatan-laajennus.html#cb2-22" tabindex="-1"></a>toydata <span class="ot">&lt;-</span> toydata <span class="sc">%&gt;%</span> <span class="fu">add_row</span>(<span class="at">id =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>)</span>
+<span id="cb2-23"><a href="esimerkkidatan-laajennus.html#cb2-23" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="esimerkkidatan-laajennus.html#cb2-24" tabindex="-1"></a><span class="co"># &quot;Uusille&quot; tutkittaville pvm, jolloin randomoitu mukaan tutkimukseen:</span></span>
+<span id="cb2-25"><a href="esimerkkidatan-laajennus.html#cb2-25" tabindex="-1"></a>toydata<span class="sc">$</span>randt[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>] <span class="ot">&lt;-</span> toydata<span class="sc">$</span>randt[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">397</span>, <span class="at">replace =</span> T)</span>
+<span id="cb2-26"><a href="esimerkkidatan-laajennus.html#cb2-26" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="esimerkkidatan-laajennus.html#cb2-27" tabindex="-1"></a><span class="co"># Uusille tutkittaville ensimmäinen &quot;labrakontrollipvm&quot;,</span></span>
+<span id="cb2-28"><a href="esimerkkidatan-laajennus.html#cb2-28" tabindex="-1"></a><span class="co"># muotoa randomointi-pvm + 60 + 1-30:</span></span>
+<span id="cb2-29"><a href="esimerkkidatan-laajennus.html#cb2-29" tabindex="-1"></a>toydata <span class="ot">&lt;-</span> toydata <span class="sc">%&gt;%</span></span>
+<span id="cb2-30"><a href="esimerkkidatan-laajennus.html#cb2-30" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dt2 =</span> <span class="fu">case_when</span>(<span class="fu">is.na</span>(dt2) <span class="sc">~</span> toydata<span class="sc">$</span>randt <span class="sc">+</span> <span class="dv">60</span></span>
+<span id="cb2-31"><a href="esimerkkidatan-laajennus.html#cb2-31" tabindex="-1"></a>                         <span class="sc">+</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">400</span>, <span class="at">replace =</span> T),</span>
+<span id="cb2-32"><a href="esimerkkidatan-laajennus.html#cb2-32" tabindex="-1"></a>                         <span class="sc">!</span><span class="fu">is.na</span>(dt2) <span class="sc">~</span> dt2))</span>
+<span id="cb2-33"><a href="esimerkkidatan-laajennus.html#cb2-33" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="esimerkkidatan-laajennus.html#cb2-34" tabindex="-1"></a><span class="co"># Uusille tutkittaville toinen &quot;labrakontrollipvm&quot;,</span></span>
+<span id="cb2-35"><a href="esimerkkidatan-laajennus.html#cb2-35" tabindex="-1"></a><span class="co"># muotoa randomointi-pvm + 100 + 1-30:</span></span>
+<span id="cb2-36"><a href="esimerkkidatan-laajennus.html#cb2-36" tabindex="-1"></a>toydata <span class="ot">&lt;-</span> toydata <span class="sc">%&gt;%</span></span>
+<span id="cb2-37"><a href="esimerkkidatan-laajennus.html#cb2-37" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dt3 =</span> <span class="fu">case_when</span>(<span class="fu">is.na</span>(dt3) <span class="sc">~</span> toydata<span class="sc">$</span>randt <span class="sc">+</span> <span class="dv">100</span></span>
+<span id="cb2-38"><a href="esimerkkidatan-laajennus.html#cb2-38" tabindex="-1"></a>                         <span class="sc">+</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">400</span>, <span class="at">replace =</span> T),</span>
+<span id="cb2-39"><a href="esimerkkidatan-laajennus.html#cb2-39" tabindex="-1"></a>                         <span class="sc">!</span><span class="fu">is.na</span>(dt3) <span class="sc">~</span> dt3))</span>
+<span id="cb2-40"><a href="esimerkkidatan-laajennus.html#cb2-40" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="esimerkkidatan-laajennus.html#cb2-41" tabindex="-1"></a><span class="co"># Uusille tutkittaville pvm, jolloin viimeksi potilaasta kuultiin,</span></span>
+<span id="cb2-42"><a href="esimerkkidatan-laajennus.html#cb2-42" tabindex="-1"></a><span class="co"># muotoa randomointi-pvm + 150 + 1-30:</span></span>
+<span id="cb2-43"><a href="esimerkkidatan-laajennus.html#cb2-43" tabindex="-1"></a>toydata <span class="ot">&lt;-</span> toydata <span class="sc">%&gt;%</span></span>
+<span id="cb2-44"><a href="esimerkkidatan-laajennus.html#cb2-44" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lastdt =</span> <span class="fu">case_when</span>(<span class="fu">is.na</span>(lastdt) <span class="sc">~</span> toydata<span class="sc">$</span>randt <span class="sc">+</span> <span class="dv">150</span></span>
+<span id="cb2-45"><a href="esimerkkidatan-laajennus.html#cb2-45" tabindex="-1"></a>                            <span class="sc">+</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>, <span class="dv">400</span>, <span class="at">replace =</span> T),</span>
+<span id="cb2-46"><a href="esimerkkidatan-laajennus.html#cb2-46" tabindex="-1"></a>                            <span class="sc">!</span><span class="fu">is.na</span>(lastdt) <span class="sc">~</span> lastdt))</span>
+<span id="cb2-47"><a href="esimerkkidatan-laajennus.html#cb2-47" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="esimerkkidatan-laajennus.html#cb2-48" tabindex="-1"></a><span class="co"># Uusille tutkittaville puuttuvat &quot;labratulokset&quot; (kovariaatit):</span></span>
+<span id="cb2-49"><a href="esimerkkidatan-laajennus.html#cb2-49" tabindex="-1"></a>toydata<span class="sc">$</span>ps1[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">397</span>, <span class="at">replace =</span> T)</span>
+<span id="cb2-50"><a href="esimerkkidatan-laajennus.html#cb2-50" tabindex="-1"></a>toydata<span class="sc">$</span>ps2[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">397</span>, <span class="at">replace =</span> T)</span>
+<span id="cb2-51"><a href="esimerkkidatan-laajennus.html#cb2-51" tabindex="-1"></a>toydata<span class="sc">$</span>ps3[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">397</span>, <span class="at">replace =</span> T)</span>
+<span id="cb2-52"><a href="esimerkkidatan-laajennus.html#cb2-52" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="esimerkkidatan-laajennus.html#cb2-53" tabindex="-1"></a><span class="co"># Uusille tutkittaville arm-arvot (A vs. B):</span></span>
+<span id="cb2-54"><a href="esimerkkidatan-laajennus.html#cb2-54" tabindex="-1"></a>toydata<span class="sc">$</span>arm[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>), <span class="dv">397</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-55"><a href="esimerkkidatan-laajennus.html#cb2-55" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="esimerkkidatan-laajennus.html#cb2-56" tabindex="-1"></a><span class="co"># Uusille tutkittaville random-iät:</span></span>
+<span id="cb2-57"><a href="esimerkkidatan-laajennus.html#cb2-57" tabindex="-1"></a>toydata<span class="sc">$</span>age[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">397</span>, <span class="at">replace =</span> T)</span>
+<span id="cb2-58"><a href="esimerkkidatan-laajennus.html#cb2-58" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="esimerkkidatan-laajennus.html#cb2-59" tabindex="-1"></a><span class="co"># Seuraavaksi uusille tutkittaville pvm,</span></span>
+<span id="cb2-60"><a href="esimerkkidatan-laajennus.html#cb2-60" tabindex="-1"></a><span class="co"># jolloin mahdollisesti siirtyivät toiseen tutkimus-armiin</span></span>
+<span id="cb2-61"><a href="esimerkkidatan-laajennus.html#cb2-61" tabindex="-1"></a><span class="co"># Laitetaan kuitenkin näitä siirtyjiä vain armiin &quot;A&quot;,</span></span>
+<span id="cb2-62"><a href="esimerkkidatan-laajennus.html#cb2-62" tabindex="-1"></a><span class="co"># jotta näemme, toimiiko painotus.</span></span>
+<span id="cb2-63"><a href="esimerkkidatan-laajennus.html#cb2-63" tabindex="-1"></a><span class="co"># Ensin random-apumuuttuja: jos saa arvon 3,</span></span>
+<span id="cb2-64"><a href="esimerkkidatan-laajennus.html#cb2-64" tabindex="-1"></a><span class="co"># tutkittava vaihtaa ryhmää kesken tutkimuksen:</span></span>
+<span id="cb2-65"><a href="esimerkkidatan-laajennus.html#cb2-65" tabindex="-1"></a>toydata<span class="sc">$</span>apumuuttuja <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">400</span>, <span class="at">replace =</span> T)</span>
+<span id="cb2-66"><a href="esimerkkidatan-laajennus.html#cb2-66" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="esimerkkidatan-laajennus.html#cb2-67" tabindex="-1"></a>toydata <span class="ot">&lt;-</span> toydata <span class="sc">%&gt;%</span></span>
+<span id="cb2-68"><a href="esimerkkidatan-laajennus.html#cb2-68" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swtrtdt =</span> <span class="fu">case_when</span>(apumuuttuja <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> arm <span class="sc">==</span><span class="st">&quot;A&quot;</span> <span class="sc">~</span> toydata<span class="sc">$</span>lastdt</span>
+<span id="cb2-69"><a href="esimerkkidatan-laajennus.html#cb2-69" tabindex="-1"></a>                             <span class="sc">-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">400</span>, <span class="at">replace =</span> T)))</span>
+<span id="cb2-70"><a href="esimerkkidatan-laajennus.html#cb2-70" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="esimerkkidatan-laajennus.html#cb2-71" tabindex="-1"></a><span class="co"># Kuvitellaan asetelma, jossa armissa &quot;A&quot; myös henkilöitä kuolee enemmän.</span></span>
+<span id="cb2-72"><a href="esimerkkidatan-laajennus.html#cb2-72" tabindex="-1"></a>toydata[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>,] <span class="ot">&lt;-</span> toydata[<span class="dv">4</span><span class="sc">:</span><span class="dv">400</span>,] <span class="sc">%&gt;%</span></span>
+<span id="cb2-73"><a href="esimerkkidatan-laajennus.html#cb2-73" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(apumuuttuja <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> arm <span class="sc">==</span><span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb2-74"><a href="esimerkkidatan-laajennus.html#cb2-74" tabindex="-1"></a>                                                apumuuttuja <span class="sc">==</span> <span class="dv">2</span> <span class="sc">&amp;</span> arm <span class="sc">==</span><span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb2-75"><a href="esimerkkidatan-laajennus.html#cb2-75" tabindex="-1"></a>                                                apumuuttuja <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> arm <span class="sc">==</span><span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb2-76"><a href="esimerkkidatan-laajennus.html#cb2-76" tabindex="-1"></a>                    </span>
+<span id="cb2-77"><a href="esimerkkidatan-laajennus.html#cb2-77" tabindex="-1"></a>                                                apumuuttuja <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> arm <span class="sc">==</span><span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb2-78"><a href="esimerkkidatan-laajennus.html#cb2-78" tabindex="-1"></a>                                                apumuuttuja <span class="sc">==</span> <span class="dv">2</span> <span class="sc">&amp;</span> arm <span class="sc">==</span><span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb2-79"><a href="esimerkkidatan-laajennus.html#cb2-79" tabindex="-1"></a>                                                apumuuttuja <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> arm <span class="sc">==</span><span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">0</span>  ))</span>
+<span id="cb2-80"><a href="esimerkkidatan-laajennus.html#cb2-80" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="esimerkkidatan-laajennus.html#cb2-81" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="esimerkkidatan-laajennus.html#cb2-82" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="esimerkkidatan-laajennus.html#cb2-83" tabindex="-1"></a><span class="co"># Yritetään antaa kaikille samat arvot eri aikapisteiden ps-kovariaattiin ihan testiksi:</span></span>
+<span id="cb2-84"><a href="esimerkkidatan-laajennus.html#cb2-84" tabindex="-1"></a>toydata<span class="sc">$</span>ps1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-85"><a href="esimerkkidatan-laajennus.html#cb2-85" tabindex="-1"></a>toydata<span class="sc">$</span>ps2 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-86"><a href="esimerkkidatan-laajennus.html#cb2-86" tabindex="-1"></a>toydata<span class="sc">$</span>ps3 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-87"><a href="esimerkkidatan-laajennus.html#cb2-87" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="esimerkkidatan-laajennus.html#cb2-88" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="esimerkkidatan-laajennus.html#cb2-89" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="esimerkkidatan-laajennus.html#cb2-90" tabindex="-1"></a><span class="co"># ipswswitch nikottelee tibblejen kanssa,</span></span>
+<span id="cb2-91"><a href="esimerkkidatan-laajennus.html#cb2-91" tabindex="-1"></a><span class="co"># joten on muutettava datasettimme data.frame-muotoon:</span></span>
+<span id="cb2-92"><a href="esimerkkidatan-laajennus.html#cb2-92" tabindex="-1"></a>toydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(toydata)</span></code></pre></div>
+<p><br></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="esimerkkikoodi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="esimerkkidatan-silmäily.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

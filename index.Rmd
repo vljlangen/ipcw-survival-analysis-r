@@ -1,0 +1,36 @@
+---
+title: "Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä"
+author: "Ville Langén"
+date: "`r format(Sys.time(), '%d.%m.%Y')`"
+#date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+description: "Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)"
+---
+
+
+
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Alkusanat
+
+Luodaan esimerkkidata ja tehdään siitä survival-analyysi "inverse of the probability of censoring weights (IPCW)" -painotuksella.
+
+Käytännössä tehdään sama prosessi mutta isommalla datalla kuin mitä tehtiin artikkelissa [Grafféon ja kumppaneiden artikkelissa (PMID: 31442762).](https://www.sciencedirect.com/science/article/pii/S0010482519302082#bib14)
+
+Artikkelin koodissa oli joitakin pieniä virheitä, ja koodia piti paikata samaisten henkilöiden tekemästä [R:n helppidokumentista.](https://cran.r-project.org/web/packages/ipcwswitch/ipcwswitch.pdf)
+
+Huom! Nämä koodit ovat lähinnä omaa harjoitteluani varten, joten jos harjoittelet niillä, teet sen omalla vastuullasi. 
+
+
+
+\
+
+\
+

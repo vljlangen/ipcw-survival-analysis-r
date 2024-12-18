@@ -1,0 +1,35 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+ 
+ 
+
+# Painotusten laskeminen
+
+Tässä vaiheessa päästään vihdoinkin laskemaan painotukset.
+
+Painotukset lasketaan komennolla *ipcw*:
+
+
+```{r ipcw, warning=FALSE}
+
+toy.rep <- ipcw(toy.rep, id = "id", tstart = tstart, tstop = tstop,
+                cens = cens, arm = "arm", bas.cov = c("age"),
+                conf = c("TDconf"), trunc = 0.01, type = 'kaplan-meier')
+
+
+```
+
+Tämä analyysi heittää warningseja runsaasti, mutta ajoin oleellisesti ihan samat analyysit [R:n helppidokumentissa](https://cran.r-project.org/web/packages/ipcwswitch/ipcwswitch.pdf) käytetyllä esimerkkidatasetillä (data("SHIdat")) ja samassa dokumentissa listatulla koodilla läpi, ja aivan samantyyppiset warningit näyttivät silläkin tulevan.
+
+Saadaan aikaiseksi seuraavalta näyttävä datasetti:
+
+```{r toy.rep_ipcw, echo=FALSE}
+
+knitr::kable(head(toy.rep))
+
+```
+
+ 
