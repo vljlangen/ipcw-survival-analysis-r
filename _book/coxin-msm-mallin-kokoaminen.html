@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13 Coxin MSM-mallin kokoaminen | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä</title>
+  <title>13 Coxin MSM-mallin kokoaminen | Inverse probability of censoring weights (IPCW) -harjoitus R:llä</title>
   <meta name="description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13 Coxin MSM-mallin kokoaminen | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä" />
+  <meta property="og:title" content="13 Coxin MSM-mallin kokoaminen | Inverse probability of censoring weights (IPCW) -harjoitus R:llä" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13 Coxin MSM-mallin kokoaminen | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä" />
+  <meta name="twitter:title" content="13 Coxin MSM-mallin kokoaminen | Inverse probability of censoring weights (IPCW) -harjoitus R:llä" />
   
   <meta name="twitter:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
   
@@ -165,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Inverse probability of censoring weights (IPCW) -harjoitus R:llä</a>
           </h1>
         </div>
 
@@ -185,22 +185,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## coxph(formula = Surv(tstart, tstop, event) ~ age + arm, data = toy.rep, 
 ##     weights = toy.rep$weights.trunc, cluster = id)
 ## 
-##   n= 33778, number of events= 200 
+##   n= 34889, number of events= 215 
 ## 
 ##           coef exp(coef)  se(coef) robust se      z Pr(&gt;|z|)    
-## age  -0.003454  0.996552  0.007962  0.008049 -0.429    0.668    
-## armB -0.740373  0.476936  0.148649  0.147168 -5.031 4.88e-07 ***
+## age   0.005044  1.005057  0.007836  0.007655  0.659     0.51    
+## armB -0.645429  0.524437  0.144854  0.143005 -4.513 6.38e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ##      exp(coef) exp(-coef) lower .95 upper .95
-## age     0.9966      1.003    0.9810    1.0124
-## armB    0.4769      2.097    0.3574    0.6364
+## age     1.0051      0.995    0.9901    1.0203
+## armB    0.5244      1.907    0.3962    0.6941
 ## 
-## Concordance= 0.592  (se = 0.023 )
-## Likelihood ratio test= 26.6  on 2 df,   p=2e-06
-## Wald test            = 26.7  on 2 df,   p=2e-06
-## Score (logrank) test = 26.58  on 2 df,   p=2e-06,   Robust = 28.26  p=7e-07
+## Concordance= 0.586  (se = 0.021 )
+## Likelihood ratio test= 21.36  on 2 df,   p=2e-05
+## Wald test            = 20.86  on 2 df,   p=3e-05
+## Score (logrank) test = 20.92  on 2 df,   p=3e-05,   Robust = 21.3  p=2e-05
 ## 
 ##   (Note: the likelihood ratio and score tests assume independence of
 ##      observations within a cluster, the Wald and robust score tests do not).</code></pre>

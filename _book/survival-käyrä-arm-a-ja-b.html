@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>15 Survival-käyrä: arm A ja B | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä</title>
+  <title>15 Survival-käyrä: arm A ja B | Inverse probability of censoring weights (IPCW) -harjoitus R:llä</title>
   <meta name="description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="15 Survival-käyrä: arm A ja B | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä" />
+  <meta property="og:title" content="15 Survival-käyrä: arm A ja B | Inverse probability of censoring weights (IPCW) -harjoitus R:llä" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="15 Survival-käyrä: arm A ja B | Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä" />
+  <meta name="twitter:title" content="15 Survival-käyrä: arm A ja B | Inverse probability of censoring weights (IPCW) -harjoitus R:llä" />
   
   <meta name="twitter:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
   
@@ -165,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Inverse of the probability of censoring weights (IPCW) -harjoitus R:llä</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Inverse probability of censoring weights (IPCW) -harjoitus R:llä</a>
           </h1>
         </div>
 
@@ -185,8 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-7"><a href="survival-käyrä-arm-a-ja-b.html#cb22-7" tabindex="-1"></a></span>
 <span id="cb22-8"><a href="survival-käyrä-arm-a-ja-b.html#cb22-8" tabindex="-1"></a>apudf</span></code></pre></div>
 <pre><code>##   arm     age
-## 1   A 35.5025
-## 2   B 35.5025</code></pre>
+## 1   A 34.6675
+## 2   B 34.6675</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="survival-käyrä-arm-a-ja-b.html#cb24-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">survfit</span>(fit.stab.w, <span class="at">newdata =</span> apudf)</span>
 <span id="cb24-2"><a href="survival-käyrä-arm-a-ja-b.html#cb24-2" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="survival-käyrä-arm-a-ja-b.html#cb24-3" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit2,</span>
