@@ -156,6 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="coxin-msm-mallin-kokoaminen.html"><a href="coxin-msm-mallin-kokoaminen.html"><i class="fa fa-check"></i><b>13</b> Coxin MSM-mallin kokoaminen</a></li>
 <li class="chapter" data-level="14" data-path="survival-käyrä-kaikki-tutkittavat.html"><a href="survival-käyrä-kaikki-tutkittavat.html"><i class="fa fa-check"></i><b>14</b> Survival-käyrä: kaikki tutkittavat</a></li>
 <li class="chapter" data-level="15" data-path="survival-käyrä-arm-a-ja-b.html"><a href="survival-käyrä-arm-a-ja-b.html"><i class="fa fa-check"></i><b>15</b> Survival-käyrä: arm A ja B</a></li>
+<li class="chapter" data-level="16" data-path="koko-koodi.html"><a href="koko-koodi.html"><i class="fa fa-check"></i><b>16</b> Koko koodi</a></li>
 </ul>
 
       </nav>
@@ -185,22 +186,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## coxph(formula = Surv(tstart, tstop, event) ~ age + arm, data = toy.rep, 
 ##     weights = toy.rep$weights.trunc, cluster = id)
 ## 
-##   n= 34889, number of events= 215 
+##   n= 30546, number of events= 193 
 ## 
 ##           coef exp(coef)  se(coef) robust se      z Pr(&gt;|z|)    
-## age   0.005044  1.005057  0.007836  0.007655  0.659     0.51    
-## armB -0.645429  0.524437  0.144854  0.143005 -4.513 6.38e-06 ***
+## age   0.009342  1.009385  0.007677  0.008020  1.165    0.244    
+## armB -0.619033  0.538465  0.151447  0.149963 -4.128 3.66e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ##      exp(coef) exp(-coef) lower .95 upper .95
-## age     1.0051      0.995    0.9901    1.0203
-## armB    0.5244      1.907    0.3962    0.6941
+## age     1.0094     0.9907    0.9936    1.0254
+## armB    0.5385     1.8571    0.4013    0.7224
 ## 
-## Concordance= 0.586  (se = 0.021 )
-## Likelihood ratio test= 21.36  on 2 df,   p=2e-05
-## Wald test            = 20.86  on 2 df,   p=3e-05
-## Score (logrank) test = 20.92  on 2 df,   p=3e-05,   Robust = 21.3  p=2e-05
+## Concordance= 0.584  (se = 0.024 )
+## Likelihood ratio test= 19.29  on 2 df,   p=6e-05
+## Wald test            = 18.36  on 2 df,   p=1e-04
+## Score (logrank) test = 19.05  on 2 df,   p=7e-05,   Robust = 19.06  p=7e-05
 ## 
 ##   (Note: the likelihood ratio and score tests assume independence of
 ##      observations within a cluster, the Wald and robust score tests do not).</code></pre>

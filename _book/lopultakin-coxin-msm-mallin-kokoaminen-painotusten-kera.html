@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>66 Lopultakin Coxin MSM-mallin kokoaminen painotusten kera | Inverse probability of censoring weights (IPCW) -harjoitus R:llä</title>
+  <meta name="description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="66 Lopultakin Coxin MSM-mallin kokoaminen painotusten kera | Inverse probability of censoring weights (IPCW) -harjoitus R:llä" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="66 Lopultakin Coxin MSM-mallin kokoaminen painotusten kera | Inverse probability of censoring weights (IPCW) -harjoitus R:llä" />
+  
+  <meta name="twitter:description" content="Inverse probability of censoring weights (IPCW) survival analysis with R (in Finnish)" />
+  
+
+<meta name="author" content="Ville Langén" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="painotusten-distribuution-plottaaminen.html"/>
+<link rel="next" href="truncated-stabilized-weights.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Alkusanat</a></li>
+<li class="chapter" data-level="2" data-path="vaaditut-paketit.html"><a href="vaaditut-paketit.html"><i class="fa fa-check"></i><b>2</b> Vaaditut paketit</a></li>
+<li class="chapter" data-level="3" data-path="esimerkkikoodi.html"><a href="esimerkkikoodi.html"><i class="fa fa-check"></i><b>3</b> Esimerkkikoodi</a></li>
+<li class="chapter" data-level="4" data-path="esimerkkidatan-laajennus.html"><a href="esimerkkidatan-laajennus.html"><i class="fa fa-check"></i><b>4</b> Esimerkkidatan laajennus</a></li>
+<li class="chapter" data-level="5" data-path="esimerkkidatan-silmäily.html"><a href="esimerkkidatan-silmäily.html"><i class="fa fa-check"></i><b>5</b> Esimerkkidatan silmäily</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="esimerkkidatan-silmäily.html"><a href="esimerkkidatan-silmäily.html#esimerkkidatan-struktuuri"><i class="fa fa-check"></i><b>5.1</b> Esimerkkidatan struktuuri</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="timestokeep-komento.html"><a href="timestokeep-komento.html"><i class="fa fa-check"></i><b>6</b> timesTokeep()-komento</a></li>
+<li class="chapter" data-level="7" data-path="long-format--muoto.html"><a href="long-format--muoto.html"><i class="fa fa-check"></i><b>7</b> Long format -muoto</a></li>
+<li class="chapter" data-level="8" data-path="päivämäärien-käsittely.html"><a href="päivämäärien-käsittely.html"><i class="fa fa-check"></i><b>8</b> Päivämäärien käsittely</a></li>
+<li class="chapter" data-level="9" data-path="ryhmää-vaihtavien-sensorointi.html"><a href="ryhmää-vaihtavien-sensorointi.html"><i class="fa fa-check"></i><b>9</b> Ryhmää vaihtavien sensorointi</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ryhmää-vaihtavien-sensorointi.html"><a href="ryhmää-vaihtavien-sensorointi.html#sensuroinnin-vaikutus"><i class="fa fa-check"></i><b>9.1</b> Sensuroinnin vaikutus</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="event-ajat-samaan-dataan.html"><a href="event-ajat-samaan-dataan.html"><i class="fa fa-check"></i><b>10</b> Event-ajat samaan dataan</a></li>
+<li class="chapter" data-level="11" data-path="painotusten-laskeminen.html"><a href="painotusten-laskeminen.html"><i class="fa fa-check"></i><b>11</b> Painotusten laskeminen</a></li>
+<li class="chapter" data-level="12" data-path="painotusten-plottaaminen.html"><a href="painotusten-plottaaminen.html"><i class="fa fa-check"></i><b>12</b> Painotusten plottaaminen</a></li>
+<li class="chapter" data-level="13" data-path="coxin-msm-mallin-kokoaminen.html"><a href="coxin-msm-mallin-kokoaminen.html"><i class="fa fa-check"></i><b>13</b> Coxin MSM-mallin kokoaminen</a></li>
+<li class="chapter" data-level="14" data-path="survival-käyrä-kaikki-tutkittavat.html"><a href="survival-käyrä-kaikki-tutkittavat.html"><i class="fa fa-check"></i><b>14</b> Survival-käyrä: kaikki tutkittavat</a></li>
+<li class="chapter" data-level="15" data-path="survival-käyrä-arm-a-ja-b.html"><a href="survival-käyrä-arm-a-ja-b.html"><i class="fa fa-check"></i><b>15</b> Survival-käyrä: arm A ja B</a></li>
+<li class="chapter" data-level="16" data-path="koko-koodi.html"><a href="koko-koodi.html"><i class="fa fa-check"></i><b>16</b> Koko koodi</a></li>
+<li class="chapter" data-level="17" data-path="load-packages.html"><a href="load-packages.html"><i class="fa fa-check"></i><b>17</b> Load packages</a></li>
+<li class="chapter" data-level="18" data-path="display-toydata.html"><a href="display-toydata.html"><i class="fa fa-check"></i><b>18</b> Display toydata</a></li>
+<li class="chapter" data-level="19" data-path="esimerkkikoodin-laajennus-ad-n400.html"><a href="esimerkkikoodin-laajennus-ad-n400.html"><i class="fa fa-check"></i><b>19</b> Esimerkkikoodin laajennus ad n=400</a></li>
+<li class="chapter" data-level="20" data-path="konvertoidaan-pvm-sarakkeet-oikeasti-date-muotoisiksi.html"><a href="konvertoidaan-pvm-sarakkeet-oikeasti-date-muotoisiksi.html"><i class="fa fa-check"></i><b>20</b> Konvertoidaan pvm-sarakkeet oikeasti date-muotoisiksi:</a></li>
+<li class="chapter" data-level="21" data-path="konvertoidaan-arm-sarake-factor-muotoon.html"><a href="konvertoidaan-arm-sarake-factor-muotoon.html"><i class="fa fa-check"></i><b>21</b> Konvertoidaan arm-sarake factor-muotoon:</a></li>
+<li class="chapter" data-level="22" data-path="luodaan-lisää-random-dataa..html"><a href="luodaan-lisää-random-dataa..html"><i class="fa fa-check"></i><b>22</b> Luodaan lisää random-dataa.</a></li>
+<li class="chapter" data-level="23" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>23</b> </a></li>
+<li class="chapter" data-level="24" data-path="ensin-lisää-tutkittavia-id-numeroita-siten-että-n400.html"><a href="ensin-lisää-tutkittavia-id-numeroita-siten-että-n400.html"><i class="fa fa-check"></i><b>24</b> Ensin lisää tutkittavia (= id-numeroita) siten, että n=400:</a></li>
+<li class="chapter" data-level="25" data-path="uusille-tutkittaville-pvm-jolloin-randomoitu-mukaan-tutkimukseen.html"><a href="uusille-tutkittaville-pvm-jolloin-randomoitu-mukaan-tutkimukseen.html"><i class="fa fa-check"></i><b>25</b> “Uusille” tutkittaville pvm, jolloin randomoitu mukaan tutkimukseen:</a></li>
+<li class="chapter" data-level="26" data-path="uusille-tutkittaville-ensimmäinen-labrakontrollipvm.html"><a href="uusille-tutkittaville-ensimmäinen-labrakontrollipvm.html"><i class="fa fa-check"></i><b>26</b> Uusille tutkittaville ensimmäinen “labrakontrollipvm”,</a></li>
+<li class="chapter" data-level="27" data-path="muotoa-randomointi-pvm-60-1-30.html"><a href="muotoa-randomointi-pvm-60-1-30.html"><i class="fa fa-check"></i><b>27</b> muotoa randomointi-pvm + 60 + 1-30:</a></li>
+<li class="chapter" data-level="28" data-path="uusille-tutkittaville-toinen-labrakontrollipvm.html"><a href="uusille-tutkittaville-toinen-labrakontrollipvm.html"><i class="fa fa-check"></i><b>28</b> Uusille tutkittaville toinen “labrakontrollipvm”,</a></li>
+<li class="chapter" data-level="29" data-path="muotoa-randomointi-pvm-100-1-30.html"><a href="muotoa-randomointi-pvm-100-1-30.html"><i class="fa fa-check"></i><b>29</b> muotoa randomointi-pvm + 100 + 1-30:</a></li>
+<li class="chapter" data-level="30" data-path="uusille-tutkittaville-pvm-jolloin-viimeksi-potilaasta-kuultiin.html"><a href="uusille-tutkittaville-pvm-jolloin-viimeksi-potilaasta-kuultiin.html"><i class="fa fa-check"></i><b>30</b> Uusille tutkittaville pvm, jolloin viimeksi potilaasta kuultiin,</a></li>
+<li class="chapter" data-level="31" data-path="muotoa-randomointi-pvm-150-1-30.html"><a href="muotoa-randomointi-pvm-150-1-30.html"><i class="fa fa-check"></i><b>31</b> muotoa randomointi-pvm + 150 + 1-30:</a></li>
+<li class="chapter" data-level="32" data-path="uusille-tutkittaville-puuttuvat-labratulokset-kovariaatit.html"><a href="uusille-tutkittaville-puuttuvat-labratulokset-kovariaatit.html"><i class="fa fa-check"></i><b>32</b> Uusille tutkittaville puuttuvat “labratulokset” (kovariaatit):</a></li>
+<li class="chapter" data-level="33" data-path="uusille-tutkittaville-arm-arvot-a-vs.-b.html"><a href="uusille-tutkittaville-arm-arvot-a-vs.-b.html"><i class="fa fa-check"></i><b>33</b> Uusille tutkittaville arm-arvot (A vs. B):</a></li>
+<li class="chapter" data-level="34" data-path="uusille-tutkittaville-random-iät.html"><a href="uusille-tutkittaville-random-iät.html"><i class="fa fa-check"></i><b>34</b> Uusille tutkittaville random-iät:</a></li>
+<li class="chapter" data-level="35" data-path="seuraavaksi-uusille-tutkittaville-pvm.html"><a href="seuraavaksi-uusille-tutkittaville-pvm.html"><i class="fa fa-check"></i><b>35</b> Seuraavaksi uusille tutkittaville pvm,</a></li>
+<li class="chapter" data-level="36" data-path="jolloin-mahdollisesti-siirtyivät-toiseen-tutkimus-armiin.html"><a href="jolloin-mahdollisesti-siirtyivät-toiseen-tutkimus-armiin.html"><i class="fa fa-check"></i><b>36</b> jolloin mahdollisesti siirtyivät toiseen tutkimus-armiin</a></li>
+<li class="chapter" data-level="37" data-path="laitetaan-kuitenkin-näitä-siirtyjiä-vain-armiin-a.html"><a href="laitetaan-kuitenkin-näitä-siirtyjiä-vain-armiin-a.html"><i class="fa fa-check"></i><b>37</b> Laitetaan kuitenkin näitä siirtyjiä vain armiin “A”,</a></li>
+<li class="chapter" data-level="38" data-path="jotta-näemme-toimiiko-painotus..html"><a href="jotta-näemme-toimiiko-painotus..html"><i class="fa fa-check"></i><b>38</b> jotta näemme, toimiiko painotus.</a></li>
+<li class="chapter" data-level="39" data-path="ensin-random-apumuuttuja-jos-saa-arvon-3.html"><a href="ensin-random-apumuuttuja-jos-saa-arvon-3.html"><i class="fa fa-check"></i><b>39</b> Ensin random-apumuuttuja: jos saa arvon 3,</a></li>
+<li class="chapter" data-level="40" data-path="tutkittava-vaihtaa-ryhmää-kesken-tutkimuksen.html"><a href="tutkittava-vaihtaa-ryhmää-kesken-tutkimuksen.html"><i class="fa fa-check"></i><b>40</b> tutkittava vaihtaa ryhmää kesken tutkimuksen:</a></li>
+<li class="chapter" data-level="41" data-path="kuvitellaan-asetelma-jossa-armissa-a-myös-henkilöitä-kuolee-enemmän..html"><a href="kuvitellaan-asetelma-jossa-armissa-a-myös-henkilöitä-kuolee-enemmän..html"><i class="fa fa-check"></i><b>41</b> Kuvitellaan asetelma, jossa armissa “A” myös henkilöitä kuolee enemmän.</a></li>
+<li class="chapter" data-level="42" data-path="yritetään-antaa-kaikille-samat-arvot-eri-aikapisteiden-ps-kovariaattiin-ihan-testiksi.html"><a href="yritetään-antaa-kaikille-samat-arvot-eri-aikapisteiden-ps-kovariaattiin-ihan-testiksi.html"><i class="fa fa-check"></i><b>42</b> Yritetään antaa kaikille samat arvot eri aikapisteiden ps-kovariaattiin ihan testiksi:</a></li>
+<li class="chapter" data-level="43" data-path="ipswswitch-nikottelee-tibblejen-kanssa.html"><a href="ipswswitch-nikottelee-tibblejen-kanssa.html"><i class="fa fa-check"></i><b>43</b> ipswswitch nikottelee tibblejen kanssa,</a></li>
+<li class="chapter" data-level="44" data-path="joten-on-muutettava-datasettimme-data.frame-muotoon.html"><a href="joten-on-muutettava-datasettimme-data.frame-muotoon.html"><i class="fa fa-check"></i><b>44</b> joten on muutettava datasettimme data.frame-muotoon:</a></li>
+<li class="chapter" data-level="45" data-path="silmäillään-nyt-uudelleen-toydataa.html"><a href="silmäillään-nyt-uudelleen-toydataa.html"><i class="fa fa-check"></i><b>45</b> Silmäillään nyt uudelleen toydataa</a></li>
+<li class="chapter" data-level="46" data-path="näytetään-toydatan-struktuuri.html"><a href="näytetään-toydatan-struktuuri.html"><i class="fa fa-check"></i><b>46</b> Näytetään toydatan struktuuri</a></li>
+<li class="chapter" data-level="47" data-path="survival-analyysin-valmistelu-ensin-timestokeep-komennolla-käsittely.html"><a href="survival-analyysin-valmistelu-ensin-timestokeep-komennolla-käsittely.html"><i class="fa fa-check"></i><b>47</b> Survival-analyysin valmistelu: ensin <em>timesTokeep</em>-komennolla käsittely</a></li>
+<li class="chapter" data-level="48" data-path="esimerkiksi-tutkittavan-id3-päivämäärät-näyttävät-seuraavalta.html"><a href="esimerkiksi-tutkittavan-id3-päivämäärät-näyttävät-seuraavalta.html"><i class="fa fa-check"></i><b>48</b> Esimerkiksi tutkittavan id=3 päivämäärät näyttävät seuraavalta:</a></li>
+<li class="chapter" data-level="49" data-path="seuraavaksi-long-format-muotoon-muuttaminen.html"><a href="seuraavaksi-long-format-muotoon-muuttaminen.html"><i class="fa fa-check"></i><b>49</b> Seuraavaksi <em>long format</em> muotoon muuttaminen</a></li>
+<li class="chapter" data-level="50" data-path="näytetään-10-ensimmäistä-riviä.html"><a href="näytetään-10-ensimmäistä-riviä.html"><i class="fa fa-check"></i><b>50</b> Näytetään 10 ensimmäistä riviä</a></li>
+<li class="chapter" data-level="51" data-path="päivämäärät-numeeriseen-muotoon-jolloin-tstart-muuttuja-pisteessä-0.html"><a href="päivämäärät-numeeriseen-muotoon-jolloin-tstart-muuttuja-pisteessä-0.html"><i class="fa fa-check"></i><b>51</b> Päivämäärät numeeriseen muotoon, jolloin tstart-muuttuja pisteessä 0</a></li>
+<li class="chapter" data-level="52" data-path="put-dates-in-numeric-format-with-tstart-at-0.html"><a href="put-dates-in-numeric-format-with-tstart-at-0.html"><i class="fa fa-check"></i><b>52</b> Put dates in numeric format with tstart at 0</a></li>
+<li class="chapter" data-level="53" data-path="ryhmää-vaihtavien-tutkittavien-sensorointi.html"><a href="ryhmää-vaihtavien-tutkittavien-sensorointi.html"><i class="fa fa-check"></i><b>53</b> Ryhmää vaihtavien tutkittavien sensorointi</a></li>
+<li class="chapter" data-level="54" data-path="patients-are-censored-when-initiating-the-other-arm-treatment-that-is-at-time-swtrtdt.html"><a href="patients-are-censored-when-initiating-the-other-arm-treatment-that-is-at-time-swtrtdt.html"><i class="fa fa-check"></i><b>54</b> Patients are censored when initiating the other arm treatment, that is, at time swtrtdt</a></li>
+<li class="chapter" data-level="55" data-path="datasetti-ennen-sensurointia-ja-sen-jälkeen.html"><a href="datasetti-ennen-sensurointia-ja-sen-jälkeen.html"><i class="fa fa-check"></i><b>55</b> Datasetti ennen sensurointia ja sen jälkeen</a></li>
+<li class="chapter" data-level="56" data-path="kaikkien-event-aikojen-yhdistäminen-yhteen-ja-samaan-dataan.html"><a href="kaikkien-event-aikojen-yhdistäminen-yhteen-ja-samaan-dataan.html"><i class="fa fa-check"></i><b>56</b> Kaikkien event-aikojen yhdistäminen yhteen ja samaan dataan</a></li>
+<li class="chapter" data-level="57" data-path="to-put-times-in-same-order-as-arms-levels.html"><a href="to-put-times-in-same-order-as-arms-levels.html"><i class="fa fa-check"></i><b>57</b> to put times in same order as arms levels</a></li>
+<li class="chapter" data-level="58" data-path="huom.-tätä-riviä-ei-ollut-referoidussa-artikkelissa.html"><a href="huom.-tätä-riviä-ei-ollut-referoidussa-artikkelissa.html"><i class="fa fa-check"></i><b>58</b> (Huom. tätä riviä ei ollut referoidussa artikkelissa,</a></li>
+<li class="chapter" data-level="59" data-path="mutta-r-dokumentaation-mukaan-se-kannattaa-ajaa..html"><a href="mutta-r-dokumentaation-mukaan-se-kannattaa-ajaa..html"><i class="fa fa-check"></i><b>59</b> mutta R-dokumentaation mukaan se kannattaa ajaa.)</a></li>
+<li class="chapter" data-level="60" data-path="now-we-can-replicate-the-rows.html"><a href="now-we-can-replicate-the-rows.html"><i class="fa fa-check"></i><b>60</b> Now, we can replicate the rows</a></li>
+<li class="chapter" data-level="61" data-path="lopputuloksena-seuraavan-näköinen-datasetti.html"><a href="lopputuloksena-seuraavan-näköinen-datasetti.html"><i class="fa fa-check"></i><b>61</b> Lopputuloksena seuraavan näköinen datasetti:</a></li>
+<li class="chapter" data-level="62" data-path="vihdoinkin-painotusten-laskeminen.html"><a href="vihdoinkin-painotusten-laskeminen.html"><i class="fa fa-check"></i><b>62</b> Vihdoinkin painotusten laskeminen</a></li>
+<li class="chapter" data-level="63" data-path="painotukset-lasketaan-komennolla-ipcw.html"><a href="painotukset-lasketaan-komennolla-ipcw.html"><i class="fa fa-check"></i><b>63</b> Painotukset lasketaan komennolla <em>ipcw</em>:</a></li>
+<li class="chapter" data-level="64" data-path="tarkastellaan-taas-dataa.html"><a href="tarkastellaan-taas-dataa.html"><i class="fa fa-check"></i><b>64</b> Tarkastellaan taas dataa</a></li>
+<li class="chapter" data-level="65" data-path="painotusten-distribuution-plottaaminen.html"><a href="painotusten-distribuution-plottaaminen.html"><i class="fa fa-check"></i><b>65</b> Painotusten distribuution plottaaminen</a></li>
+<li class="chapter" data-level="66" data-path="lopultakin-coxin-msm-mallin-kokoaminen-painotusten-kera.html"><a href="lopultakin-coxin-msm-mallin-kokoaminen-painotusten-kera.html"><i class="fa fa-check"></i><b>66</b> Lopultakin Coxin MSM-mallin kokoaminen painotusten kera</a></li>
+<li class="chapter" data-level="67" data-path="truncated-stabilized-weights.html"><a href="truncated-stabilized-weights.html"><i class="fa fa-check"></i><b>67</b> Truncated stabilized weights:</a></li>
+<li class="chapter" data-level="68" data-path="summary-mallista.html"><a href="summary-mallista.html"><i class="fa fa-check"></i><b>68</b> Summary mallista</a></li>
+<li class="chapter" data-level="69" data-path="survival-käyrän-plottaaminen---tutkimuksen-koko-populaatio.html"><a href="survival-käyrän-plottaaminen---tutkimuksen-koko-populaatio.html"><i class="fa fa-check"></i><b>69</b> Survival-käyrän plottaaminen - tutkimuksen koko populaatio</a></li>
+<li class="chapter" data-level="70" data-path="survival-käyrän-plottaaminen-erikseen-arm-asta-ja-bstä.html"><a href="survival-käyrän-plottaaminen-erikseen-arm-asta-ja-bstä.html"><i class="fa fa-check"></i><b>70</b> Survival-käyrän plottaaminen erikseen arm A:sta ja B:stä</a></li>
+<li class="chapter" data-level="71" data-path="apudatasetin-luominen.html"><a href="apudatasetin-luominen.html"><i class="fa fa-check"></i><b>71</b> Apudatasetin luominen</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Inverse probability of censoring weights (IPCW) -harjoitus R:llä</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lopultakin-coxin-msm-mallin-kokoaminen-painotusten-kera" class="section level1 hasAnchor" number="66">
+<h1><span class="header-section-number">66</span> Lopultakin Coxin MSM-mallin kokoaminen painotusten kera<a href="lopultakin-coxin-msm-mallin-kokoaminen-painotusten-kera.html#lopultakin-coxin-msm-mallin-kokoaminen-painotusten-kera" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="painotusten-distribuution-plottaaminen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="truncated-stabilized-weights.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

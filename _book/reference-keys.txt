@@ -15,3 +15,4 @@ painotusten-plottaaminen
 coxin-msm-mallin-kokoaminen
 survival-käyrä-kaikki-tutkittavat
 survival-käyrä-arm-a-ja-b
+koko-koodi

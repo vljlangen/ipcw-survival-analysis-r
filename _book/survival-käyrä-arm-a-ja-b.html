@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="survival-käyrä-kaikki-tutkittavat.html"/>
-
+<link rel="next" href="koko-koodi.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -156,6 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="coxin-msm-mallin-kokoaminen.html"><a href="coxin-msm-mallin-kokoaminen.html"><i class="fa fa-check"></i><b>13</b> Coxin MSM-mallin kokoaminen</a></li>
 <li class="chapter" data-level="14" data-path="survival-käyrä-kaikki-tutkittavat.html"><a href="survival-käyrä-kaikki-tutkittavat.html"><i class="fa fa-check"></i><b>14</b> Survival-käyrä: kaikki tutkittavat</a></li>
 <li class="chapter" data-level="15" data-path="survival-käyrä-arm-a-ja-b.html"><a href="survival-käyrä-arm-a-ja-b.html"><i class="fa fa-check"></i><b>15</b> Survival-käyrä: arm A ja B</a></li>
+<li class="chapter" data-level="16" data-path="koko-koodi.html"><a href="koko-koodi.html"><i class="fa fa-check"></i><b>16</b> Koko koodi</a></li>
 </ul>
 
       </nav>
@@ -184,9 +185,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-6"><a href="survival-käyrä-arm-a-ja-b.html#cb22-6" tabindex="-1"></a>apudf<span class="sc">$</span>arm <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(apudf<span class="sc">$</span>arm) </span>
 <span id="cb22-7"><a href="survival-käyrä-arm-a-ja-b.html#cb22-7" tabindex="-1"></a></span>
 <span id="cb22-8"><a href="survival-käyrä-arm-a-ja-b.html#cb22-8" tabindex="-1"></a>apudf</span></code></pre></div>
-<pre><code>##   arm     age
-## 1   A 34.6675
-## 2   B 34.6675</code></pre>
+<pre><code>##   arm    age
+## 1   A 35.015
+## 2   B 35.015</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="survival-käyrä-arm-a-ja-b.html#cb24-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">survfit</span>(fit.stab.w, <span class="at">newdata =</span> apudf)</span>
 <span id="cb24-2"><a href="survival-käyrä-arm-a-ja-b.html#cb24-2" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="survival-käyrä-arm-a-ja-b.html#cb24-3" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit2,</span>
@@ -202,8 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="survival-käyrä-kaikki-tutkittavat.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="survival-käyrä-kaikki-tutkittavat.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="koko-koodi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

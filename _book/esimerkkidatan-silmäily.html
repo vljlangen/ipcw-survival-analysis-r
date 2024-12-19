@@ -156,6 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="coxin-msm-mallin-kokoaminen.html"><a href="coxin-msm-mallin-kokoaminen.html"><i class="fa fa-check"></i><b>13</b> Coxin MSM-mallin kokoaminen</a></li>
 <li class="chapter" data-level="14" data-path="survival-käyrä-kaikki-tutkittavat.html"><a href="survival-käyrä-kaikki-tutkittavat.html"><i class="fa fa-check"></i><b>14</b> Survival-käyrä: kaikki tutkittavat</a></li>
 <li class="chapter" data-level="15" data-path="survival-käyrä-arm-a-ja-b.html"><a href="survival-käyrä-arm-a-ja-b.html"><i class="fa fa-check"></i><b>15</b> Survival-käyrä: arm A ja B</a></li>
+<li class="chapter" data-level="16" data-path="koko-koodi.html"><a href="koko-koodi.html"><i class="fa fa-check"></i><b>16</b> Koko koodi</a></li>
 </ul>
 
       </nav>
@@ -176,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="esimerkkidatan-silmäily" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">5</span> Esimerkkidatan silmäily<a href="esimerkkidatan-silmäily.html#esimerkkidatan-silmäily" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Silmäillään hieman esimerkkidataa, varmistetaan, että kaikki kunnossa. Katsotaan head-komennolla 10 ensimmäistä riviä:</p>
-<table style="width:100%;">
+<table>
 <colgroup>
 <col width="3%" />
 <col width="11%" />
@@ -189,7 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <col width="11%" />
 <col width="11%" />
 <col width="4%" />
-<col width="8%" />
+<col width="11%" />
 <col width="12%" />
 </colgroup>
 <thead>
@@ -238,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">2017-12-12</td>
 <td align="left">B</td>
 <td align="left">NA</td>
-<td align="right">1</td>
+<td align="right">3</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
@@ -252,53 +253,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">2017-08-02</td>
 <td align="left">2018-01-02</td>
 <td align="left">A</td>
-<td align="left">NA</td>
-<td align="right">1</td>
+<td align="left">2018-01-01</td>
+<td align="right">3</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="left">2018-02-08</td>
-<td align="left">2018-12-23</td>
-<td align="right">0</td>
-<td align="right">35</td>
+<td align="left">2018-02-06</td>
+<td align="left">2018-09-06</td>
+<td align="right">1</td>
+<td align="right">42</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="left">2018-04-23</td>
-<td align="left">2018-06-10</td>
+<td align="left">2018-04-20</td>
+<td align="left">2018-06-05</td>
 <td align="left">B</td>
 <td align="left">NA</td>
-<td align="right">2</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="left">2018-02-04</td>
-<td align="left">2018-11-16</td>
+<td align="left">2018-01-14</td>
+<td align="left">2019-01-10</td>
 <td align="right">1</td>
-<td align="right">39</td>
+<td align="right">38</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="left">2018-04-21</td>
-<td align="left">2018-06-09</td>
-<td align="left">B</td>
+<td align="left">2018-04-14</td>
+<td align="left">2018-04-26</td>
+<td align="left">A</td>
 <td align="left">NA</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="left">2018-01-24</td>
-<td align="left">2019-04-01</td>
-<td align="right">0</td>
-<td align="right">49</td>
+<td align="left">2018-01-19</td>
+<td align="left">2018-10-03</td>
+<td align="right">1</td>
+<td align="right">46</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="left">2018-04-18</td>
-<td align="left">2018-05-06</td>
-<td align="left">B</td>
+<td align="left">2018-04-12</td>
+<td align="left">2018-05-24</td>
+<td align="left">A</td>
 <td align="left">NA</td>
-<td align="right">3</td>
+<td align="right">1</td>
 </tr>
 </tbody>
 </table>
@@ -310,16 +311,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ id         : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ randt      : Date, format: &quot;2018-01-12&quot; &quot;2017-11-04&quot; &quot;2017-05-20&quot; ...
 ##  $ lastdt     : Date, format: &quot;2018-03-02&quot; &quot;2017-12-15&quot; &quot;2018-01-04&quot; ...
-##  $ status     : int  1 1 0 0 1 0 1 1 0 1 ...
-##  $ age        : int  20 50 40 35 39 49 20 37 44 29 ...
+##  $ status     : int  1 1 0 1 1 1 0 0 1 0 ...
+##  $ age        : int  20 50 40 42 38 46 40 33 23 34 ...
 ##  $ ps1        : num  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ ps2        : num  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ ps3        : num  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ dt2        : Date, format: &quot;2018-02-02&quot; &quot;2017-12-01&quot; &quot;2017-08-02&quot; ...
 ##  $ dt3        : Date, format: &quot;2018-03-01&quot; &quot;2017-12-12&quot; &quot;2018-01-02&quot; ...
-##  $ arm        : Factor w/ 2 levels &quot;A&quot;,&quot;B&quot;: 1 2 1 2 2 2 1 1 2 1 ...
-##  $ swtrtdt    : Date, format: NA NA NA ...
-##  $ apumuuttuja: int  1 1 1 2 1 3 1 2 2 2 ...</code></pre>
+##  $ arm        : Factor w/ 2 levels &quot;A&quot;,&quot;B&quot;: 1 2 1 2 1 1 2 2 2 2 ...
+##  $ swtrtdt    : Date, format: NA NA &quot;2018-01-01&quot; ...
+##  $ apumuuttuja: int  1 3 3 1 1 1 3 2 1 3 ...</code></pre>
 
 </div>
 </div>
